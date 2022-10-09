@@ -5,7 +5,7 @@
 cd data_augmentation
 sh run_aug.sh
 其中 data_augementation/data/train_aug.txt为增强后的数据.
-如果需要原始的文本数据请从这里 https://pan.baidu.com/s/1fHS75lH7GU_hqG-mA1YKqg 下载。提取码: as6j
+如果需要原始的文本数据请从这里[下载链接] (https://pan.baidu.com/s/1fHS75lH7GU_hqG-mA1YKqg) 下载。提取码: as6j
 
 ## 文本纠错
 
