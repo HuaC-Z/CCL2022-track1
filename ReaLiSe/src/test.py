@@ -90,8 +90,18 @@ def test(ckpt_dir, data_dir, ckpt_num, testset_year, output_dir, device):
         ckpt_name = f'saved_ckpt-{ckpt_num}'
         model_dir = os.path.join(weight_dir, ckpt_name)
 
-    test_picke_path = 'data/sighan.train.ccl22_track1_test.pkl'
-    label_path = 'data/yaclc-csc-test.lbl'
+    if testset_year == 13:
+        test_picke_path = os.path.join(data_dir, 'test.sighan13.pkl')
+        label_path = os.path.join(data_dir, 'test.sighan13.lbl.tsv')
+    elif testset_year == 14:
+        test_picke_path = os.path.join(data_dir, 'test.sighan14.pkl')
+        label_path = os.path.join(data_dir, 'test.sighan14.lbl.tsv')
+    elif testset_year == 15:
+        test_picke_path = os.path.join(data_dir, 'test.sighan15.pkl')
+        label_path = os.path.join(data_dir, 'test.sighan15.lbl.tsv')
+    else:
+        test_picke_path = '/home/zhangjie/race1/ReaLiSe/data/sighan.train.ccl22_track1_test.pkl'
+        label_path = '/home/zhangjie/race1/ReaLiSe/data/yaclc-csc-test.lbl'
 
     # model_type
     training_args = torch.load(os.path.join(weight_dir, 'training_args.bin'))
@@ -120,8 +130,15 @@ def test(ckpt_dir, data_dir, ckpt_num, testset_year, output_dir, device):
     model = model.eval()
     print('Load model done.')
 
+    # Test epoch
     for batch in tqdm(batches):
         for t in batch:
+            #print(batch['src'])
+            #print(batch['tgt'][0])
+            #print(batch['src_idx'][0])
+            #print(batch['tgt_idx'][0])
+            #print(batch['lengths'][0])
+            #exit()
             if t not in ['id', 'src', 'tgt', 'lengths', 'tokens_size', 'pho_lens']:
                 batch[t] = batch[t].to(device)
 
@@ -134,11 +151,11 @@ def test(ckpt_dir, data_dir, ckpt_num, testset_year, output_dir, device):
         preds = np.argmax(preds, axis=-1)
         batch['src_idx'] = batch['src_idx'].detach().cpu().numpy()
         batch['pred_idx'] = preds
-
+    # Metric
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
-    pred_txt_path = os.path.join(output_dir, 'preds.txt')
-    pred_lbl_path = os.path.join(output_dir, 'labels.txt')
+    pred_txt_path = os.path.join(output_dir, 'ReaLiSe.txt')
+    pred_lbl_path = os.path.join(output_dir, 'ReaLiSe.lbl')
     metric = Metric(vocab_path=weight_dir)
     results = metric.metric(
         batches=batches,

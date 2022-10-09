@@ -1,7 +1,7 @@
 import torch
 from transformers import BertTokenizer
 from utils import *
-from RoBERTa_01.model import BERT_Model
+from model import BERT_Model
 from tqdm import tqdm
 import os
 import argparse

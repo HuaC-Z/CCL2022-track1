@@ -1,0 +1,12 @@
+jieba
+pypinyin
+numpy
+six
+loguru
+scikit-learn>=0.19.1
+pytorch-lightning>=1.1.2
+pandas
+transformers>=4.4.2
+tensorboardX
+paddlenlp
+paddlepaddle-gpu

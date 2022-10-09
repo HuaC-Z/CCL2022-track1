@@ -7,21 +7,25 @@ from eval_sent_level import get_sent_metrics
 def detection():
     wfile = open("predict/detect.txt", "w", encoding="utf-8")
 
-    with open("predict/cra.txt", "r", encoding="utf-8") as cra_rfile:
+    with open("predict/cra.lbl", "r", encoding="utf-8") as cra_rfile:
         lines_cra = cra_rfile.readlines()
 
-    with open("predict/realise.txt", "r", encoding="utf-8") as realise_rfile:
+    with open("predict/realise.lbl", "r", encoding="utf-8") as realise_rfile:
         lines_realise = realise_rfile.readlines()
 
-    with open("predict/roberta_01.txt", "r", encoding="utf-8") as roberta_01_rfile:
+    with open("predict/roberta_01.lbl", "r", encoding="utf-8") as roberta_01_rfile:
         lines_roberta_01 = roberta_01_rfile.readlines()
 
-    for cra, realise, roberta_01 in zip(lines_cra, lines_realise, lines_roberta_01):
+    with open("predict/macbert4csc.lbl", "r", encoding="utf-8") as macbert4csc_rfile:
+        lines_macbert4csc = macbert4csc_rfile.readlines()
+
+    for cra, realise, roberta_01, macbert4csc in zip(lines_cra, lines_realise, lines_roberta_01, lines_macbert4csc):
         ensembel = {}
         ID = cra.split(", ")[0]
         cra_list = cra.split(", ")[1:]
         realise_list = realise.split(", ")[1:]
         roberta_01_list = roberta_01.split(", ")[1:]
+        macbert4csc_list = macbert4csc.split(", ")[1:]
 
         if len(cra_list) != 1: 
             for idx, char in zip(cra_list[::2], cra_list[1::2]):
@@ -34,6 +38,11 @@ def detection():
 
         if len(roberta_01_list) != 1: 
             for idx, char in zip(roberta_01_list[::2], roberta_01_list[1::2]):
+                if ensembel.get(idx):continue
+                ensembel[idx] = [char]
+
+        if len(macbert4csc_list) != 1: 
+            for idx, char in zip(macbert4csc_list[::2], macbert4csc_list[1::2]):
                 if ensembel.get(idx):continue
                 ensembel[idx] = [char]
 
@@ -104,9 +113,9 @@ def evaluate(pred, gold, only_detection=False):
     sent_metrics = get_sent_metrics(pred, gold, only_detection)
     return char_metrics, sent_metrics
 
-# detection()
+detection()
 correction()
-detection, correction = evaluate("predict/correct.txt", "yaclc-csc-test-5.1.lbl")
+detection, correction = evaluate("predict/correct.txt", "yaclc-csc-test.lbl")
 
 
 

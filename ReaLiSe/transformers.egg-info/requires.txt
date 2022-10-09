@@ -1,0 +1,15 @@
+numpy
+boto3
+requests
+tqdm
+regex
+sentencepiece
+sacremoses
+
+[all]
+uvicorn
+fastapi
+
+[serving]
+uvicorn
+fastapi

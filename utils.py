@@ -47,7 +47,6 @@ def get_best_score(best_score, best_epoch, epoch, *params):
     return best_score, best_epoch
 
 
-# def save_decode_result_para(decode_pred, decode_pred_, data, path):
 def save_decode_result_para(decode_pred, data, path):
     """
     decode_pred:模型预测结果
@@ -70,7 +69,6 @@ def save_decode_result_para(decode_pred, data, path):
         for i, idx in enumerate(pred_i):
             tmp_char = ["0", "1"][idx]
             line += tmp_char
-        # f.write("src:" + src['src_tex 
     f.close()
 
 
@@ -148,3 +146,24 @@ def save_decode_result_lbl_01(decode_pred, data, path):
 
             line = line.strip(", ")
             fout.write(line + "\n")
+
+
+def make_lbl_file(src_path, save_path):
+
+    with open(src_path, "r") as f:
+        lines = f.readlines()
+    wfile  = open(save_path, "w")
+
+    for idx, line in enumerate(lines):
+        src_sentence, trg_sentence = line.strip().split("\t")
+        if src_sentence == trg_sentence:
+            wfile.write(f"{idx}, 0\n")
+        else:
+            write_text = f"{idx}"
+            for i, (src_char, trg_char) in enumerate(zip(src_sentence, trg_sentence)):
+                if src_char != trg_char:
+                    write_text += f", {i+1}, {trg_char}"
+                wfile.write(f"{write_text}\n")
+
+    
+

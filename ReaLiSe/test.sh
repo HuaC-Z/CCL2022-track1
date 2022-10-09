@@ -1,6 +1,6 @@
 DATE_DIR="data"
-CKPT_DIR="output_old/saved_ckpt-5000"
-OUTPUT_DIR="output_predict"
+CKPT_DIR="output/saved_ckpt-12000"
+OUTPUT_DIR="../predict"
 
 python src/test.py \
     --device "cuda:0" \
