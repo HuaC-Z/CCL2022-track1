@@ -26,8 +26,6 @@ python predict.py \
 --env_pos 0 \
 --local_rank -1 \
 --use_cuda
-
-其中训练时用到的候选集可以从这里下载[]()
 ```
 
 #### macbert4csc
