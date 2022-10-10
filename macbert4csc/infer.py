@@ -115,8 +115,8 @@ def make_lbl_file(src_path, save_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="infer")
-    parser.add_argument("--ckpt_path", default="macbert4csc/epoch=09-val_loss=0.08.ckpt", help="path to config file", type=str)
-    parser.add_argument("--vocab_path", default="macbert4csc/vocab.txt", help="path to config file", type=str)
+    parser.add_argument("--ckpt_path", default="output/macbert4csc/epoch=09-val_loss=0.08.ckpt", help="path to config file", type=str)
+    parser.add_argument("--vocab_path", default="output/macbert4csc/vocab.txt", help="path to config file", type=str)
     parser.add_argument("--config_file", default="train_macbert4csc.yml", help="path to config file", type=str)
     parser.add_argument("--text_file", default='./yaclc-csc_test.src')
     parser.add_argument("--save_path", default='../predict/macbert4csc.lbl')
