@@ -4,10 +4,10 @@ PRETRAIN_MODEL=./chinese_roberta_wwm_large_ext_L-24_H-1024_A-16_torch
 mkdir -p $DATA_DIR
 
 
-TRAIN_SRC_FILE= ./datasets/sighan_and_wang.train.ccl22.src
-TRAIN_TRG_FILE= ./datasets/sighan_and_wang.train.ccl22.trg
-DEV_SRC_FILE=./datasets/dev/standard/yaclc-csc_dev.src
-DEV_TRG_FILE=./datasets/dev/yaclc-csc_dev.lbl
+TRAIN_SRC_FILE= ./datasets/train/src.txt
+TRAIN_TRG_FILE= ./datasets/train/trg.txt
+DEV_SRC_FILE=./datasets/dev/src.txt
+DEV_TRG_FILE=./datasets/dev/lbl.txt
 
 
 if [ ! -f $DATA_DIR"/train.pkl" ]; then

@@ -2,16 +2,7 @@ from torch.utils.data import DataLoader
 from dataset import CSC_Dataset, Padding_in_batch
 from eval_char_level import get_char_metrics
 from eval_sent_level import get_sent_metrics, sent_metric_detect
-
-
-# vocab_path = "./bert-base-chinese/vocab.txt"
-# vocab_path = "./RoBERTa_zh_L12_PyTorch/vocab.txt"
-vocab_path = './chinese_roberta_wwm_large_ext_L-24_H-1024_A-16_torch/vocab.txt'
-vocab = []
-with open(vocab_path, "r") as f:
-    lines = f.readlines()
-for line in lines:
-    vocab.append(line.strip())
+import os
 
 
 def init_dataloader(path, config, subset, tokenizer):
@@ -120,6 +111,7 @@ def save_decode_result_lbl(decode_pred, data, path):
             fout.write(line + "\n")
         print("count:",count)
 
+
 def save_decode_result_lbl_01(decode_pred, data, path):
     with open(path, "w") as fout:
         for pred_i, src in zip(decode_pred, data):
@@ -149,3 +141,6 @@ def save_decode_result_lbl_01(decode_pred, data, path):
 
             line = line.strip(", ")
             fout.write(line + "\n")
+
+
+

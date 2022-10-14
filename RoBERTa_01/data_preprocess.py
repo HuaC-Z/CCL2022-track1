@@ -122,10 +122,8 @@ def construct_parallel_data_lbl(src_path, trg_path):
                 modification.append((int(trg_items[i])-1, trg_items[i+1]))
         trg_sent = "".join(trg_sent)
         tag_sent_ = ['0' for i in range(len(src_sent))]
-        # print(str(count), src_sent, trg_sent, tag_sent, modification)
         for idx, char in modification:
             tag_sent_[idx] = '1'
-        # print(id, src_sent, trg_sent)
         parallel_data.append((id, src_sent, trg_sent, ''.join(tag_sent_), modification))
 
     print("error-free sentences: " + str(c_no_error_sent))

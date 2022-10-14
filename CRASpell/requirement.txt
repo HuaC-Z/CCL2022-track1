@@ -1,0 +1,10 @@
+numpy==1.19.2
+torch==1.8.0
+six==1.15.0
+sentencepiece==0.1.95
+dill==0.3.5.1
+torchcrf==1.1.0
+pyltp==0.4.0
+jieba==0.42.1
+pypinyin==0.40.0
+tqdm==4.53.0

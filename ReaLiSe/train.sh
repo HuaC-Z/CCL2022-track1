@@ -9,10 +9,10 @@ python -m torch.distributed.launch --master_port=453$(($RANDOM%90+10)) --nproc_p
     --output_dir $OUTPUT_DIR  \
     --do_train --do_eval --do_predict  \
     --data_dir $DATE_DIR \
-    --train_file sighan.train.ccl22_track1.pkl \
-    --dev_file sighan.train.ccl22_track1.pkl \
-    --dev_label_file dev/yaclc-csc_dev.lbl \
-    --predict_file sighan.train.ccl22_track1.pkl \
+    --train_file train/src.txt \
+    --dev_file train/train.pkl \
+    --dev_label_file dev/lbl.txt \
+    --predict_file dev/dev.pkl \
     --predict_label_file dev/yaclc-csc_dev.lbl \
     --order_metric sent-detect-f1  \
     --metric_reverse  \
